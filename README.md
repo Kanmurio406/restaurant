@@ -1,4 +1,5 @@
 # 台北美食餐廳
+![image](screenshot/1.png)
 
 ## 功能
 * 瀏覽美食列表
