@@ -22,11 +22,25 @@ app.get('/', (req, res) => {
 // show detail route
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  console.log(restaurant)
   res.render('show', { restaurant: restaurant})
 })
 
 // search route
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.toLowerCase()
+  const restaurantFound = restaurantList.results.filter(restaurant => {
+    const name = restaurant.name.toLowerCase()
+    const category = restaurant.category.toLowerCase()
+    if (name.includes(keyword) || category.includes(keyword)) {
+      return restaurant
+    }
+  })
+  if (restaurantFound.length > 0) {
+    res.render('index', { restaurants: restaurantFound, keyword: keyword })
+  } else {
+    res.render('noresult', { keyword: keyword })
+  } 
+})
 
 // start server listening
 app.listen(port, () => {
