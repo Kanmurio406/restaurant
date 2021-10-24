@@ -11,12 +11,18 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// set static page source
+app.use(express.static('public'))
+
 // index route
 app.get('/', (req, res) => {
   res.render('index', { restaurants: restaurantList.results })
 })
 
 // show detail route
+app.get('/restaurants/:restaurant_id', (req, res) => {
+  res.render('show', { restaurants: restaurantList.results})
+})
 
 // search route
 
