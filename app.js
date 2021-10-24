@@ -21,7 +21,9 @@ app.get('/', (req, res) => {
 
 // show detail route
 app.get('/restaurants/:restaurant_id', (req, res) => {
-  res.render('show', { restaurants: restaurantList.results})
+  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+  console.log(restaurant)
+  res.render('show', { restaurant: restaurant})
 })
 
 // search route
